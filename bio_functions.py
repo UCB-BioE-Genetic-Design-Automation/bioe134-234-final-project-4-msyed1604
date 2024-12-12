@@ -1,3 +1,4 @@
+'''
 def reverse_complement(sequence):
     """
     Calculates the reverse complement of a DNA sequence.
@@ -75,6 +76,7 @@ if __name__ == "__main__":
         print(f"Translation of '{dna_example}': {translation_result}")
     except Exception as e:
         print(f"Error: {str(e)}")
+'''
 
 def design_gRNA(pam_sequence: str, gene_sequence: str) -> dict:
     """
