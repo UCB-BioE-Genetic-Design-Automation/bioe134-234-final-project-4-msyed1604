@@ -3,7 +3,7 @@
 
 ## Project Overview
 
-This project focuses on developing a Python-based toolkit for CRISPR-mediated genome editing in insects. The toolkit is designed to facilitate gene knockouts in various insect species using different CRISPR/Cas systems. It involves designing guide RNAs (gRNAs), constructing insect-specific CRISPR vectors, and simulating transformation processes to deliver these vectors into insect tissues. The project aims to make the process of insect gene editing more accessible by providing a streamlined and reusable codebase.
+This project focuses on developing a Python-based workflow for CRISPR-mediated genome editing in insects. The workflow is designed to facilitate gene knockouts in various insect species using different CRISPR/Cas systems. It involves designing guide RNAs (gRNAs), constructing insect-specific CRISPR vectors, and simulating transformation processes to deliver these vectors into insect tissues. The project aims to make the process of insect gene editing more accessible by providing a streamlined and reusable codebase.
 
 ---
 
