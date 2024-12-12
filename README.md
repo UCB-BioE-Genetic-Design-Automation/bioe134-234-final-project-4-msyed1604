@@ -9,7 +9,7 @@ This project focuses on developing a Python-based toolkit for CRISPR-mediated ge
 
 ## Scope of Work
 
-As part of the final project for BioE 134, I developed several functions that are foundational for CRISPR-mediated genome editing:
+As part of the final project for BioE 134, I developed several functions that are foundational for CRISPR-mediated genome editing particularly in the scope of insect organisms:
 1. gRNA Design: This function generates guide RNAs by taking a PAM sequence and a gene sequence as inputs. It outputs the protospacer and tracer RNA necessary for CRISPR targeting.
 2. Toolkit Selection: This function selects the appropriate CRISPR toolkit based on the organism name, providing details such as PAM sequence and other properties.
 3. Construction File Creation: This function generates a construction file outlining the steps for performing a gene knockout, integrating gRNA design and toolkit selection.
@@ -17,6 +17,7 @@ As part of the final project for BioE 134, I developed several functions that ar
 5. CRISPR Efficiency Prediction: This function predicts the efficiency of a CRISPR gRNA design based on PAM sequence compatibility and target site properties.
 6. Multiplexed gRNA Design: This function designs multiple gRNAs for simultaneous targeting of multiple genes.
 7. Generate Construction File with Cas13 Integration: This function generates a construction file for RNA targeting using Cas13, integrating organism-specific Cas13 variant selection and crRNA design.
+8. Cas13 Variant Selection: Selects the most efficient Cas13 variant for RNA targeting based on organism-specific optimizations, including efficiency and specificity.
 
 Each function includes input validation and error handling to ensure proper use, raising errors for invalid inputs or conditions that cannot be processed.
 
@@ -107,6 +108,18 @@ design_multiplexed_gRNAs(["NGG", "TTTV"], ["ATGCGTACGTAGCTAGCTAGNGG", "TTTACGTAG
 create_cas13_construction_file("Drosophila melanogaster", "AUGCGCUAUGCUAGC")
 # Returns detailed Cas13 construction file content
 ```
+
+### 8.  Cas13 Variant Selection (`select_cas13_variant`)
+
+- **Description**: Selects the most efficient Cas13 variant for RNA targeting based on organism-specific optimizations, including efficiency and specificity.
+- **Input**: Organism name (string)
+- **Output**: Dictionary containing details of the selected Cas13 variant, including variant name, efficiency, and specificity.
+
+**Example**:
+```python
+select_cas13_variant("Drosophila melanogaster")
+# Returns: {"variant": "CasFX4", "efficiency": 90, "specificity": "high"}
+```
 ---
 
 ## Error Handling
@@ -133,9 +146,12 @@ create_cas13_construction_file("Drosophila melanogaster", "AUGCGCUAUGCUAGC")
 - Raises `ValueError` if the number of PAM sequences does not match the number of gene sequences.
 - Raises `ValueError` if any gene sequence is too short or invalid.
 
-
 ### Generate Construction File with Cas13 Integration
 - Raises `ValueError` if the RNA sequence is empty.
+- Raises `ValueError` if the organism name is not recognized or supported.
+
+### Cas13 Variant Selection
+- Ensures case insensitivity in organism name input.
 - Raises `ValueError` if the organism name is not recognized or supported.
 
 ---
@@ -154,7 +170,8 @@ Invalid inputs (e.g., unsupported organisms, non-nucleotide characters in sequen
 - `tests/test_rna_secondary_structure.py`
 - `tests/test_crispr_efficiency.py`
 - `tests/test_multiplexed_gRNA.py`
-- `tests/test_cas13_construction_file.py`
+- `tests/test_cas13_construction_file.py` 
+- `tests/test_select_cas13_variant.py`
 
 The tests validate:
 1. Correct outputs for typical inputs.
@@ -182,7 +199,8 @@ from bio_functions import design_gRNA,
     analyze_rna_secondary_structure,
     predict_crispr_efficiency,
     design_multiplexed_gRNAs,
-    create_cas13_construction_file
+    create_cas13_construction_file,
+    select_cas13_variant
 
 # Example: Design a gRNA
 gRNA = design_gRNA("NGG", "ATGCGTACGTAGCTAGCTAGNGG")
@@ -195,6 +213,29 @@ print(toolkit)
 # Example: Generate a construction file
 construction_file = create_construction_file("Drosophila melanogaster", "ATGCGTACGTAGCTAGCTAGNGG")
 print(construction_file)
+
+# Example: Analyze RNA secondary structure
+rna_structure = analyze_rna_secondary_structure("AUGCGCUAUGCUAGC")
+print(rna_structure)
+
+# Example: Predict CRISPR efficiency
+efficiency_score = predict_crispr_efficiency("NGG", "ATGCGTACGTAGCTA")
+print(efficiency_score)
+
+# Example: Design multiplexed gRNAs
+multiplexed_gRNAs = design_multiplexed_gRNAs(
+    ["NGG", "TTTV"], 
+    ["ATGCGTACGTAGCTAGCTAGNGG", "TTTACGTAGCTTTTV"]
+)
+print(multiplexed_gRNAs)
+
+# Example: Generate Cas13 construction file
+cas13_construction_file = create_cas13_construction_file("Drosophila melanogaster", "AUGCGCUAUGCUAGC")
+print(cas13_construction_file)
+
+# Example: Select a Cas13 variant
+cas13_variant = select_cas13_variant("Drosophila melanogaster")
+print(cas13_variant)
 ```
 
 ---
