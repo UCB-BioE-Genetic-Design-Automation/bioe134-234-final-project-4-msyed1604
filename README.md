@@ -3,77 +3,163 @@
 
 ## Project Overview
 
-This project provides two core bioinformatics utilities: 
-
-1. **Reverse Complement (revcomp)**: Calculates the reverse complement of a DNA sequence.
-2. **Translate**: Translates a DNA sequence into a protein sequence according to the standard genetic code.
-
-These functions are implemented in **Python** and are part of the broader bioinformatics toolset aimed at automating genetic sequence analysis tasks.
+This project focuses on developing a Python-based toolkit for CRISPR-mediated genome editing in insects. The toolkit is designed to facilitate gene knockouts in various insect species using different CRISPR/Cas systems. It involves designing guide RNAs (gRNAs), constructing insect-specific CRISPR vectors, and simulating transformation processes to deliver these vectors into insect tissues. The project aims to make the process of insect gene editing more accessible by providing a streamlined and reusable codebase.
 
 ---
 
 ## Scope of Work
 
-As part of the final project for BioE 134, I developed two functions that are foundational for sequence analysis:
+As part of the final project for BioE 134, I developed several functions that are foundational for CRISPR-mediated genome editing:
+1. gRNA Design: This function generates guide RNAs by taking a PAM sequence and a gene sequence as inputs. It outputs the protospacer and tracer RNA necessary for CRISPR targeting.
+2. Toolkit Selection: This function selects the appropriate CRISPR toolkit based on the organism name, providing details such as PAM sequence and other properties.
+3. Construction File Creation: This function generates a construction file outlining the steps for performing a gene knockout, integrating gRNA design and toolkit selection.
+4. RNA Secondary Structure Analysis: This function evaluates RNA secondary structure to assess accessibility for gRNA binding.
+5. CRISPR Efficiency Prediction: This function predicts the efficiency of a CRISPR gRNA design based on PAM sequence compatibility and target site properties.
+6. Multiplexed gRNA Design: This function designs multiple gRNAs for simultaneous targeting of multiple genes.
+7. Generate Construction File with Cas13 Integration: This function generates a construction file for RNA targeting using Cas13, integrating organism-specific Cas13 variant selection and crRNA design.
 
-1. **Reverse Complement**: This function returns the reverse complement of a DNA sequence, which is an essential task in many genetic analysis pipelines.
-   
-2. **Translate**: This function translates a DNA sequence into a corresponding protein sequence by converting each codon into its corresponding amino acid, based on the standard genetic code.
-
-Both functions include input validation and error handling to ensure proper use. The reverse complement function raises an error for sequences containing invalid characters, while the translate function raises an error for sequences not divisible by three, as well as sequences containing invalid characters.
+Each function includes input validation and error handling to ensure proper use, raising errors for invalid inputs or conditions that cannot be processed.
 
 ---
 
 ## Function Descriptions
 
-### 1. Reverse Complement (`reverse_complement`)
+### 1. gRNA Design (`design_gRNA`)
 
-- **Description**: This function takes a DNA sequence and returns its reverse complement. Only valid nucleotides (A, T, C, G) are allowed. The function raises a `ValueError` if invalid characters are found.
-- **Input**: A string representing the DNA sequence.
-- **Output**: A string representing the reverse complement of the input DNA sequence.
-
-**Example**:
-```python
-reverse_complement("ATGC")
-# Returns: "GCAT"
-```
-
-### 2. Translate (`translate`)
-
-- **Description**: This function translates a DNA sequence into a corresponding protein sequence. The input sequence must be divisible by 3. If it contains invalid characters or is not a multiple of three, the function raises a `ValueError`. Stop codons are represented as underscores (`_`).
-- **Input**: A string representing the DNA sequence.
-- **Output**: A string representing the translated protein sequence.
+- **Description**: Generates guide RNAs by taking a PAM sequence and a gene sequence as inputs.
+- **Input**:  PAM sequence (string), Gene sequence (string).
+- **Output**: Dictionary containing protospacer and tracer RNA sequences.
 
 **Example**:
 ```python
-translate("ATGGCC")
-# Returns: "MA"
+design_gRNA("NGG", "ATGCGTACGTAGCTAGCTAGNGG")
+# Returns: {"protospacer": "ATGCGTACGTAGCTA", "tracer_rna": "GTTTTAGAGCTAGAA"}
 ```
 
+### 2.  Toolkit Selection (`select_toolkit`)
+
+- **Description**: Selects the appropriate CRISPR toolkit based on the organism name.
+- **Input**: Organism name as represented by a string.
+- **Output**: Dictionary containing PAM sequence and CRISPR system details.
+
+**Example**:
+```python
+select_toolkit("Drosophila melanogaster")
+# Returns: {"pam_sequence": "NGG", "system": "Cas9"}
+```
+
+### 3.  Construction File Creation (`create_construction_file`)
+
+- **Description**: Generates a construction file outlining steps for gene knockout.
+- **Input**: Organism name (string), Gene sequence (string).
+- **Output**:  String detailing construction steps.
+
+**Example**:
+```python
+create_construction_file("Drosophila melanogaster", "ATGCGTACGTAGCTAGCTAGNGG")
+# Returns detailed construction file content
+```
+
+### 4.  RNA Secondary Structure Analysis (`analyze_rna_secondary_structure`)
+
+- **Description**: Analyzes RNA secondary structure to assess accessibility for gRNA binding.
+- **Input**: RNA sequence as represented by a string.
+- **Output**: Dictionary containing hairpin count and accessibility score.
+
+**Example**:
+```python
+analyze_rna_secondary_structure("AUGCGCUAUGCUAGC")
+# Returns: {"hairpin_count": 2, "accessibility_score": 8}
+```
+
+### 5.  CRISPR Efficiency Prediction (`predict_crispr_efficiency`)
+
+- **Description**: Predicts efficiency of a CRISPR gRNA design.
+- **Input**: PAM sequence (string), Target sequence (string).
+- **Output**: Efficiency score (float).
+
+**Example**:
+```python
+predict_crispr_efficiency("NGG", "ATGCGTACGTAGCTA")
+# Returns efficiency score
+```
+
+### 6.  Multiplexed gRNA Design (`design_multiplexed_gRNAs`)
+
+- **Description**: Designs multiple gRNAs for simultaneous targeting.
+- **Input**: List of PAM sequences, List of gene sequences.
+- **Output**: List of dictionaries with protospacer and tracer RNA sequences.
+
+**Example**:
+```python
+design_multiplexed_gRNAs(["NGG", "TTTV"], ["ATGCGTACGTAGCTAGCTAGNGG", "TTTACGTAGCTTTTV"])
+# Returns list of gRNA designs
+```
+
+### 7.  Generate Construction File with Cas13 Integration (`create_cas13_construction_file`)
+
+- **Description**: Generates a construction file for RNA targeting using Cas13.
+- **Input**: Organism name (string), RNA sequence (string).
+- **Output**: String detailing construction steps with Cas13 integration.
+
+**Example**:
+```python
+create_cas13_construction_file("Drosophila melanogaster", "AUGCGCUAUGCUAGC")
+# Returns detailed Cas13 construction file content
+```
 ---
 
 ## Error Handling
 
-### Reverse Complement
-- Raises `ValueError` if invalid characters (anything other than A, T, C, G) are present in the DNA sequence.
+### gRNA Design
+- Raises `ValueError`  if the PAM sequence is not found in the gene sequence.
+- Raises `ValueError` if the gene sequence is too short to contain a valid protospacer.
 
-### Translate
-- Raises `ValueError` if the sequence contains invalid characters or if the sequence length is not a multiple of three.
+### Toolkit Selection
+- Raises `ValueError` if the organism name is not recognized or supported.
+
+### Construction File Creation
+- Raises `ValueError` if the organism name is not recognized.
+- Raises `ValueError` if the gene sequence is empty or invalid.
+
+### RNA Secondary Structure Analysis
+- Raises `ValueError` if the RNA sequence is empty or contains invalid characters.
+
+### CRISPR Efficiency Prediction
+- Returns lower efficiency scores if the PAM sequence does not match the target sequence.
+- Raises `ValueError` if invalid characters are present in the target sequence.
+
+### Multiplexed gRNA Design
+- Raises `ValueError` if the number of PAM sequences does not match the number of gene sequences.
+- Raises `ValueError` if any gene sequence is too short or invalid.
+
+
+### Generate Construction File with Cas13 Integration
+- Raises `ValueError` if the RNA sequence is empty.
+- Raises `ValueError` if the organism name is not recognized or supported.
 
 ---
 
 ## Testing
 
-Both functions have been tested with standard, edge, and invalid input cases. A comprehensive suite of tests has been implemented using **pytest**.
+All functions have been tested using **pytest**, covering both standard and edge cases to ensure robustness and accuracy. The tests include:
+Valid inputs (e.g., typical PAM sequences, gene/RNA sequences).
+Edge cases (e.g., empty inputs, mismatched lists for multiplexed designs).
+Invalid inputs (e.g., unsupported organisms, non-nucleotide characters in sequences).
 
-- **Test File**: `tests/test_bio_functions.py`
+**Test Files**: 
+- `tests/test_gRNA_design.py`
+- `tests/test_toolkit_selection.py`
+- `tests/test_construction_file.py`
+- `tests/test_rna_secondary_structure.py`
+- `tests/test_crispr_efficiency.py`
+- `tests/test_multiplexed_gRNA.py`
+- `tests/test_cas13_construction_file.py`
 
-The tests include:
-- Valid sequences
-- Sequences containing invalid characters
-- Sequences with lengths not divisible by three (for the translate function)
-- Palindromic sequences (for reverse complement)
-- Lowercase input handling
+The tests validate:
+1. Correct outputs for typical inputs.
+2. Proper error handling for invalid inputs.
+3. Functionality across diverse scenarios (e.g., long RNA sequences, multiple PAMs)
 
 ---
 
@@ -90,20 +176,29 @@ pip install -r requirements.txt
 Once installed, you can use the functions as follows:
 
 ```python
-from bio_functions import reverse_complement, translate
+from bio_functions import design_gRNA,
+    select_toolkit,
+    create_construction_file,
+    analyze_rna_secondary_structure,
+    predict_crispr_efficiency,
+    design_multiplexed_gRNAs,
+    create_cas13_construction_file
 
-# Example DNA sequence
-dna_sequence = "ATGC"
+# Example: Design a gRNA
+gRNA = design_gRNA("NGG", "ATGCGTACGTAGCTAGCTAGNGG")
+print(gRNA)
 
-# Reverse complement
-print(reverse_complement(dna_sequence))
+# Example: Select a toolkit
+toolkit = select_toolkit("Drosophila melanogaster")
+print(toolkit)
 
-# Translate
-print(translate("ATGGCC"))
+# Example: Generate a construction file
+construction_file = create_construction_file("Drosophila melanogaster", "ATGCGTACGTAGCTAGCTAGNGG")
+print(construction_file)
 ```
 
 ---
 
 ## Conclusion
 
-These two functions provide foundational operations for working with DNA sequences in bioinformatics pipelines. They have been tested and documented, ensuring proper error handling and robust functionality.
+This project provides essential tools for CRISPR-mediated genome editing workflows in bioinformatics, supporting precise genetic manipulation across various insect species. The functions are robustly implemented, thoroughly tested, and well-documented to ensure reliability and ease of use in real-world applications.

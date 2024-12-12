@@ -1,0 +1,45 @@
+{
+    "id": "org.c9.function.bioinformatics.cas13.variant.selection.v1",
+    "name": "Cas13 Variant Selection",
+    "description": "Selects the most efficient Cas13 variant for RNA targeting based on organism-specific optimizations, including efficiency and specificity.",
+    "type": "function",
+    "keywords": ["CRISPR", "Cas13", "variant selection", "RNA targeting", "bioinformatics"],
+    "date_created": "12-12-2024",
+    "date_last_modified": "12-12-2024",
+    "inputs": [
+      {
+        "name": "organism_name",
+        "type": "string",
+        "description": "The name of the organism for which the optimal Cas13 variant is being selected."
+      }
+    ],
+    "outputs": [
+      {
+        "type": "object",
+        "description": "A dictionary containing details of the selected Cas13 variant, including variant name, efficiency, and specificity."
+      }
+    ],
+    "examples": [
+      {
+        "input": {
+          "organism_name": "Drosophila melanogaster"
+        },
+        "output": {
+          "variant": "CasFX4",
+          "efficiency": 90,
+          "specificity": "high"
+        }
+      },
+      {
+        "input": {
+          "organism_name": "Tribolium castaneum"
+        },
+        "output": {
+          "variant": "CasFB8",
+          "efficiency": 70,
+          "specificity": "moderate"
+        }
+      }
+    ]
+  }
+  

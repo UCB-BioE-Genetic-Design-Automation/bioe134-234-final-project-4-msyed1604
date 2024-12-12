@@ -1,0 +1,28 @@
+{
+    "id": "org.c9.function.bioinformatics.gRNA.design.v1",
+    "name": "gRNA Design",
+    "description": "Designs a guide RNA (gRNA) by taking a PAM sequence and a gene sequence as inputs.",
+    "type": "function",
+    "keywords": ["CRISPR", "gRNA", "bioinformatics", "PAM"],
+    "date_created": "12-12-2024",
+    "date_last_modified": "12-12-2024",
+    "inputs": [
+      {
+        "name": "pam_sequence",
+        "type": "string",
+        "description": "The PAM sequence specific to the CRISPR system."
+      },
+      {
+        "name": "gene_sequence",
+        "type": "string",
+        "description": "The DNA sequence of the target gene."
+      }
+    ],
+    "outputs": [
+      {
+        "type": "object",
+        "description": "An object containing protospacer and tracer RNA sequences."
+      }
+    ]
+  }
+  

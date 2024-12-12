@@ -1,0 +1,34 @@
+{
+    "id": "org.c9.function.bioinformatics.rna.secondary_structure.analysis.v1",
+    "name": "RNA Secondary Structure Analysis",
+    "description": "Analyzes the RNA secondary structure to assess accessibility for gRNA binding. It evaluates structural metrics like hairpin count and accessibility score.",
+    "type": "function",
+    "keywords": ["RNA", "secondary structure", "gRNA", "bioinformatics"],
+    "date_created": "12-12-2024",
+    "date_last_modified": "12-12-2024",
+    "inputs": [
+      {
+        "name": "rna_sequence",
+        "type": "string",
+        "description": "The RNA sequence to analyze for secondary structure."
+      }
+    ],
+    "outputs": [
+      {
+        "type": "object",
+        "description": "An object containing structural metrics such as hairpin count and accessibility score."
+      }
+    ],
+    "examples": [
+      {
+        "input": {
+          "rna_sequence": "AUGCGCUAUGCUAGC"
+        },
+        "output": {
+          "hairpin_count": 2,
+          "accessibility_score": 8
+        }
+      }
+    ]
+  }
+  

@@ -1,75 +1,42 @@
 {
   "prompts": [
     {
-      "request": "What would you get if you flipped and complemented 'ATGC'?",
+      "request": "Create a construction file for targeting RNA in Drosophila melanogaster using Cas13 with the RNA sequence 'AUGCGCUAUGCUAGC'.",
       "expected_call": {
-        "function_id": "org.c9.function.bioe_134.reverse_complement",
+        "function_id": "org.c9.function.bioinformatics.construction_file.cas13_integration.v1",
         "arguments": {
-          "sequence": "ATGC"
+          "organism_name": "Drosophila melanogaster",
+          "rna_sequence": "AUGCGCUAUGCUAGC"
         }
       },
       "expected_response": {
-        "sequence": "GCAT"
+        "construction_file": "CRISPR/Cas13 Construction File\nOrganism: Drosophila melanogaster\nRNA Sequence: AUGCGCUAUGCUAGC\nSelected Cas13 Variant: CasFX4\nEfficiency: 90%\nHairpin Count: 2\nAccessibility Score: 8\nSteps:\n1. Assemble crRNA with Cas13 (CasFX4).\n2. Deliver complex into insect tissues.\n3. Validate transcript knockdown via qPCR."
       }
     },
     {
-      "request": "Turn 'ATGGCC' into amino acids.",
+      "request": "Generate a construction file for RNA editing in Tribolium castaneum using Cas13 with the sequence 'GCUAUGCUAGCGUACG'.",
       "expected_call": {
-        "function_id": "org.c9.function.bioe_134.translate",
+        "function_id": "org.c9.function.bioinformatics.construction_file.cas13_integration.v1",
         "arguments": {
-          "sequence": "ATGGCC"
+          "organism_name": "Tribolium castaneum",
+          "rna_sequence": "GCUAUGCUAGCGUACG"
         }
       },
       "expected_response": {
-        "sequence": "MA"
+        "construction_file": "CRISPR/Cas13 Construction File\nOrganism: Tribolium castaneum\nRNA Sequence: GCUAUGCUAGCGUACG\nSelected Cas13 Variant: CasFB8\nEfficiency: 70%\nHairpin Count: 3\nAccessibility Score: 7\nSteps:\n1. Assemble crRNA with Cas13 (CasFB8).\n2. Deliver complex into insect tissues.\n3. Validate transcript knockdown via qPCR."
       }
     },
     {
-      "request": "Flip and complement 'GCTAGC' for me.",
+      "request": "I need a construction file for RNA targeting in Aedes aegypti using Cas13 with RNA 'CCGAUACGUAGCGAU'.",
       "expected_call": {
-        "function_id": "org.c9.function.bioe_134.reverse_complement",
+        "function_id": "org.c9.function.bioinformatics.construction_file.cas13_integration.v1",
         "arguments": {
-          "sequence": "GCTAGC"
+          "organism_name": "Aedes aegypti",
+          "rna_sequence": "CCGAUACGUAGCGAU"
         }
       },
       "expected_response": {
-        "sequence": "GCTAGC"
-      }
-    },
-    {
-      "request": "Convert 'GGTACC' to its corresponding amino acids.",
-      "expected_call": {
-        "function_id": "org.c9.function.bioe_134.translate",
-        "arguments": {
-          "sequence": "GGTACC"
-        }
-      },
-      "expected_response": {
-        "sequence": "GP"
-      }
-    },
-    {
-      "request": "What’s the reverse of 'TTAGGCTA' with complements?",
-      "expected_call": {
-        "function_id": "org.c9.function.bioe_134.reverse_complement",
-        "arguments": {
-          "sequence": "TTAGGCTA"
-        }
-      },
-      "expected_response": {
-        "sequence": "TAGCCTAA"
-      }
-    },
-    {
-      "request": "Can you turn 'ATGCGTGA' into a protein sequence?",
-      "expected_call": {
-        "function_id": "org.c9.function.bioe_134.translate",
-        "arguments": {
-          "sequence": "ATGCGTGA"
-        }
-      },
-      "expected_response": {
-        "sequence": "MR"
+        "construction_file": "CRISPR/Cas13 Construction File\nOrganism: Aedes aegypti\nRNA Sequence: CCGAUACGUAGCGAU\nSelected Cas13 Variant: CasFB5\nEfficiency: 65%\nHairpin Count: 1\nAccessibility Score: 9\nSteps:\n1. Assemble crRNA with Cas13 (CasFB5).\n2. Deliver complex into insect tissues.\n3. Validate transcript knockdown via qPCR."
       }
     }
   ]

@@ -1,4 +1,4 @@
-import pytest
+import pytest # type: ignore
 from bio_functions import reverse_complement
 
 def test_reverse_complement_standard_sequences():

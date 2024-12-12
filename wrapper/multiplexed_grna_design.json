@@ -1,0 +1,46 @@
+{
+    "id": "org.c9.function.bioinformatics.multiplexed_gRNA.design.v1",
+    "name": "Multiplexed gRNA Design",
+    "description": "Designs multiple gRNAs for simultaneous targeting of multiple genes by taking a list of PAM sequences and gene sequences as inputs.",
+    "type": "function",
+    "keywords": ["CRISPR", "gRNA", "multiplexed design", "bioinformatics", "PAM"],
+    "date_created": "12-12-2024",
+    "date_last_modified": "12-12-2024",
+    "inputs": [
+      {
+        "name": "pam_sequences",
+        "type": "array",
+        "description": "A list of PAM sequences specific to the CRISPR systems being used."
+      },
+      {
+        "name": "gene_sequences",
+        "type": "array",
+        "description": "A list of DNA sequences for the target genes."
+      }
+    ],
+    "outputs": [
+      {
+        "type": "array",
+        "description": "A list of objects where each object contains protospacer and tracer RNA sequences for each gene."
+      }
+    ],
+    "examples": [
+      {
+        "input": {
+          "pam_sequences": ["NGG", "TTTV"],
+          "gene_sequences": ["ATGCGTACGTAGCTAGCTAGNGG", "TTTACGTAGCTTTTV"]
+        },
+        "output": [
+          {
+            "protospacer": "ATGCGTACGTAGCTA",
+            "tracer_rna": "GTTTTAGAGCTAGAA"
+          },
+          {
+            "protospacer": "TTTACGTAGCTTTT",
+            "tracer_rna": "GTTTTAGAGCTAA"
+          }
+        ]
+      }
+    ]
+  }
+  

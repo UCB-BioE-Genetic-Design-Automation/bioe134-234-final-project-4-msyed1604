@@ -1,0 +1,39 @@
+{
+    "id": "org.c9.function.bioinformatics.construction_file.create.v1",
+    "name": "Construction File Creation",
+    "description": "Generates a construction file for performing a CRISPR-mediated gene knockout in an insect species. It integrates organism-specific toolkit selection and gRNA design.",
+    "type": "function",
+    "keywords": ["CRISPR", "construction file", "genome editing", "bioinformatics"],
+    "date_created": "12-12-2024",
+    "date_last_modified": "12-12-2024",
+    "inputs": [
+      {
+        "name": "organism_name",
+        "type": "string",
+        "description": "The name of the insect species for which the construction file is being created."
+      },
+      {
+        "name": "gene_sequence",
+        "type": "string",
+        "description": "The DNA sequence of the target gene to be knocked out."
+      }
+    ],
+    "outputs": [
+      {
+        "type": "string",
+        "description": "A detailed construction file containing steps for CRISPR-mediated gene knockout, including toolkit selection, gRNA design, and transformation protocols."
+      }
+    ],
+    "examples": [
+      {
+        "input": {
+          "organism_name": "Drosophila melanogaster",
+          "gene_sequence": "ATGCGTACGTAGCTAGCTAGNGG"
+        },
+        "output": 
+          {
+            "$schema":"https://json-schema.org/draft/2020-12/schema"
+          }
+    }]
+}
+  

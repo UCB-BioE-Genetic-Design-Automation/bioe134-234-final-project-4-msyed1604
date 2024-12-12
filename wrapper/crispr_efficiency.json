@@ -1,0 +1,48 @@
+{
+    "id": "org.c9.function.bioinformatics.crispr.efficiency.prediction.v1",
+    "name": "CRISPR Efficiency Prediction",
+    "description": "Predicts the efficiency of a CRISPR gRNA design based on PAM sequence compatibility and target site properties.",
+    "type": "function",
+    "keywords": ["CRISPR", "efficiency", "gRNA", "bioinformatics", "PAM"],
+    "date_created": "12-12-2024",
+    "date_last_modified": "12-12-2024",
+    "inputs": [
+      {
+        "name": "pam_sequence",
+        "type": "string",
+        "description": "The PAM sequence used by the CRISPR system."
+      },
+      {
+        "name": "target_sequence",
+        "type": "string",
+        "description": "The DNA target sequence to evaluate for CRISPR efficiency."
+      }
+    ],
+    "outputs": [
+      {
+        "type": "float",
+        "description": "A predicted efficiency score (0 to 100) for the CRISPR gRNA design."
+      }
+    ],
+    "examples": [
+      {
+        "input": {
+          "pam_sequence": "NGG",
+          "target_sequence": "ATGCGTACGTAGCTA"
+        },
+        "output": {
+          "efficiency_score": 85.6
+        }
+      },
+      {
+        "input": {
+          "pam_sequence": "TTTV",
+          "target_sequence": "TTTACGTAGCTTTTV"
+        },
+        "output": {
+          "efficiency_score": 78.3
+        }
+      }
+    ]
+  }
+  
